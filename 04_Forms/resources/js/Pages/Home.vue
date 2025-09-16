@@ -6,27 +6,26 @@ defineOptions({
     layout: DashboardLayout
 })
 defineProps({
-    user: Object
+    // define your component props here
+    user: Object,
 })
 
 const form = useForm({
-    name: null,
+    name: '',
     avatar: null,
 })
 
-
 const submit = () => {
-    //form.post('update-profile', {method: 'put'})
-    form.post('update-profile', { method: 'put' })
-/*     router.post(`update-profile`, {
+    // first method
+    /* router.post('/update-profile', {
         _method: 'put',
         name: form.name,
         avatar: form.avatar,
     }) */
 
-
-}
-
+    // second method
+    form.post('/update-profile', { method: 'put' })
+} 
 </script>
 
 <template>

@@ -23,28 +23,31 @@ class UserController extends Controller
 
     public function updateAvatar(Request $request)
     {
-        $validated = $request->validate([
+        $request->validate([
+            'avatar' => 'sometimes|image:jpeg,png,gif,jpg:max:2048', // 2 mb
             'name' => 'sometimes|string',
-            'avatar' => 'nullable|image|max:2048' // 2 mb image size
         ]);
+
+        // get auth user
 
         $user = $request->user();
 
-        if ($request->input('name')) {
-            $user->name = $request->input('name');
-        }
-
-        if ($request->file('avatar')) {
+        if($request->file('avatar')) {
+            // save path of avatar in the public and then assign to user
             $path = $request->file('avatar')->store('avatars', 'public');
             $user->avatar = $path;
         }
 
-        //dd($validated);
+        if($request->input('name')) {
+            $user->name = $request->input('name');
+        }
 
         $user->save();
 
         return Inertia::render('Home', [
             'user' => $user
         ]);
+
+
     }
 }
