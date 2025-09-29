@@ -20,7 +20,7 @@ class DashboardController extends Controller
         return Inertia::render('Dashboard/Index', [
             'user' => Auth::user(),
             'title' => 'Dashboard',
-            'posts' => fn() => Post::all(),
+            'posts' => Post::all(),
             'todos' => Inertia::defer(
                 fn() => 
                 Http::withoutVerifying()->get('https://jsonplaceholder.typicode.com/todos?_limit=30')
