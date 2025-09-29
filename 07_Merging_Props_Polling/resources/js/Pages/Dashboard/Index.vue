@@ -43,4 +43,6 @@ import { Deferred } from '@inertiajs/vue3'
         </div>
     </section>
 
+    
+
 </template>

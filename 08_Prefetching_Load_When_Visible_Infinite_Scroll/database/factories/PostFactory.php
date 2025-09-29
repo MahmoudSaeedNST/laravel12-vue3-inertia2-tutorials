@@ -5,9 +5,9 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Notification>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Post>
  */
-class NotificationFactory extends Factory
+class PostFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,10 +17,10 @@ class NotificationFactory extends Factory
     public function definition(): array
     {
         return [
-            'title' => $this->faker->sentence,
-            'message' => $this->faker->paragraph,
-            'is_read' => $this->faker->boolean(),
+            'title' => fake()->sentence(),
+            'body' => fake()->paragraph(),
             'user_id' => 1,
+            'published' => fake()->boolean(),
         ];
     }
 }
