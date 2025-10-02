@@ -10,7 +10,12 @@ class UserController extends Controller
 {
     public function index()
     {
-        return Inertia::render('Users');
+
+        if (Auth::user()->can('viewAny', Auth::user())) {
+            return Inertia::render('Users');
+        } else {
+            abort(403, 'Unauthorized action.');
+        }
     }
 
     /* updateAvatar 
@@ -30,24 +35,20 @@ class UserController extends Controller
 
         $user = $request->user();
 
-        if($request->file('avatar')) {
+        if ($request->file('avatar')) {
             // save path of avatar in the public and then assign to user
             $path = $request->file('avatar')->store('avatars', 'public');
             $user->avatar = $path;
         }
 
-        if($request->input('name')) {
+        if ($request->input('name')) {
             $user->name = $request->input('name');
         }
 
-        if($user->save()){
+        if ($user->save()) {
             return to_route('users')->with('success',  "User Updated Successfully");
         } else {
             return to_route('users')->with('error',  "User fail to update");
         }
-
-        
-
-
     }
 }

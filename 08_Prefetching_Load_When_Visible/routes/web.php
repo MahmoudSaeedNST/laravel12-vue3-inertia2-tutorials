@@ -21,7 +21,7 @@ Route::get('/about', function () {
 });
 
 // user profile route get(uri, blade, data)
-Route::inertia('users', 'Users')->name('users');
+Route::resource('users', UserController::class);
 
 Route::get('/profile', [UserController::class, 'index']);
 

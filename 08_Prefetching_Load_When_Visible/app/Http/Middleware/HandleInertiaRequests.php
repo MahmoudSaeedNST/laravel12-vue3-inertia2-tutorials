@@ -46,6 +46,15 @@ class HandleInertiaRequests extends Middleware
                 'success' => fn () => $request->session()->get('success'),
                 'error' => fn () => $request->session()->get('error'),
             ],
+            'can' => [
+                'viewAny' => fn () => $request->user() ? $request->user()->can('viewAny', $request->user()) : false,
+                'view' => fn () => $request->user() ? $request->user()->can('view', $request->user()) : false,
+                'create' => fn () => $request->user() ? $request->user()->can('create', $request->user()) : false,
+                'update' => fn () => $request->user() ? $request->user()->can('update', $request->user()) : false,
+                'delete' => fn () => $request->user() ? $request->user()->can('delete', $request->user()) : false,
+                'restore' => fn () => $request->user() ? $request->user()->can('restore', $request->user()) : false,
+                'forceDelete' => fn () => $request->user() ? $request->user()->can('forceDelete', $request->user()) : false,
+            ],
         ];
     }
 }

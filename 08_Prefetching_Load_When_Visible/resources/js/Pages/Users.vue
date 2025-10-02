@@ -31,7 +31,7 @@ const submit = () => {
             <Alert type="success" v-if="form.wasSuccessful"
                 :message="$page.props.flash.success || $page.props.flash.message" />
 
-            <form @submit.prevent="submit" class="flex flex-col gap-4">
+            <form v-if="$page.props.can.update" @submit.prevent="submit" class="flex flex-col gap-4">
                 <input type="text" v-model="form.name" class="border py-2 px-3" />
                 <Alert type="error" v-if="form.errors.name" :message="form.errors.name" />
                 <input type="file" @input="form.avatar = $event.target.files[0]" class="border py-2 px-3" />
